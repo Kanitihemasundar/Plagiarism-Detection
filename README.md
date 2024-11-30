@@ -16,10 +16,11 @@ Animated interface with modern design.
 Separate buttons for text, video, and real-time plagiarism detection.(future implimentations)
 
 Getting Started:
+
 Prerequisites
-Python 3.9 or higher
+Python 3.8 or higher
 Required libraries:
-Copy code
+
 Flask  
 Tkinter  
 scikit-learn  
