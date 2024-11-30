@@ -1,16 +1,20 @@
-Features
+Features:
 Text Plagiarism Detection: Detects copied text by comparing the source document with other documents or web content.
+
 Video Plagiarism Detection: Analyzes videos to identify content similarity with other sources.
+
 Source Identification: Locates the source of copied content, including URLs, YouTube videos, and academic papers.
 Similarity Metrics:
 Cosine Similarity
 SBERT & BERT similarity
 Pearson, Spearman, and RMSE correlation
 Visualization: Displays similarity scores and highlights plagiarized text.
+
 Frontend Options:
 File upload and download (CSV of plagiarism scores).
 Animated interface with modern design.
 Separate buttons for text, video, and real-time plagiarism detection.(future implimentations)
+
 Getting Started:
 Prerequisites
 Python 3.9 or higher
@@ -23,6 +27,7 @@ TensorFlow
 transformers  
 OpenCV  
 matplotlib  
+
 Install dependencies:
 bash
 Copy code
@@ -31,7 +36,8 @@ Installation
 Clone the repository:
 bash
 Copy code
-git clone:https//github.com/Kanitihemasundar/Plagiarism-Detection
+git clone: https//github.com/Kanitihemasundar/Plagiarism-Detection
+
 Navigate to the project directory:
 bash
 Copy code
@@ -59,7 +65,7 @@ plagiarism-detection-tool/
 ├── templates/             # HTML templates              
 ├── requirements.txt       # Dependencies  
 ├── README.md              # Project documentation  
-Screenshots
+
 1. Text Plagiarism Detection:
 Display a screenshot of the text plagiarism detection interface.
 
