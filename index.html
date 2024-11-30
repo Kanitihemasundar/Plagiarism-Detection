@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plagiarism Checker</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            min-height: 100vh;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        .plagiarism-card {
+            margin-bottom: 15px;
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            animation: slideIn 0.6s ease-out;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .plagiarism-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .plagiarism-card-0 { background: linear-gradient(45deg, #007bff, #00c6ff); }
+        .plagiarism-card-1 { background: linear-gradient(45deg, #28a745, #84fc95); }
+        .plagiarism-card-2 { background: linear-gradient(45deg, #17a2b8, #89fffd); }
+        .plagiarism-card-3 { background: linear-gradient(45deg, #ffc107, #ffe985); }
+        .plagiarism-card-4 { background: linear-gradient(45deg, #dc3545, #ff8a8a); }
+        .plagiarism-card-5 { background: linear-gradient(45deg, #007bff, #00c6ff); }
+        .plagiarism-card-6 { background: linear-gradient(45deg, #28a745, #84fc95); }
+        .plagiarism-card-7 { background: linear-gradient(45deg, #17a2b8, #89fffd); }
+        .plagiarism-card-8 { background: linear-gradient(45deg, #ffc107, #ffe985); }
+        .plagiarism-card-9 { background: linear-gradient(45deg, #dc3545, #ff8a8a); }
+
+        .similarity-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            font-weight: bold;
+            margin-right: 15px;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        .message-box {
+            color: white;
+            background: linear-gradient(45deg, #22e21b, #88ff84);
+            border: none;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-family: Arial, sans-serif;
+            border-radius: 10px;
+            animation: slideIn 0.6s ease-out;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #007bff, #00c6ff);
+            border: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .form-control, .form-control-file {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: transform 0.3s ease;
+        }
+
+        .form-control:focus {
+            transform: scale(1.01);
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+            }
+        }
+
+        h2, h3 {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: slideIn 0.6s ease-out;
+        }
+
+        label {
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Plagiarism Checker</h2>
+
+        <form method="POST" action="/" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">Upload a Text File:</label>
+                <input type="file" class="form-control-file" id="file" name="file" accept=".txt">
+            </div>
+            <div class="form-group">
+                <label for="input_text">Enter Text to Check for Plagiarism:</label>
+                <textarea class="form-control" id="input_text" name="input_text" rows="6"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Check Plagiarism</button>
+        </form>
+
+        <h3 class="mt-4">Results:</h3>
+        {% if check_message %}
+          <div class="message-box">{{ check_message }}</div>
+        {% endif %}
+
+        <div>
+            {% if plagiarism_results %}
+                <div class="row">
+                    {% for result in plagiarism_results %}
+                        <div class="col-md-12">
+                            <div class="plagiarism-card plagiarism-card-{{ loop.index0 }}">
+                                <div class="d-flex align-items-center">
+                                    <div class="similarity-circle">
+                                        {{ result.split('|')[-1].split(':')[-1].strip() }}
+                                    </div>
+                                    <div>
+                                        <p>{{ result }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <p style="background: linear-gradient(45deg, #73cfe6, #48a7bd); padding: 15px; border-radius: 10px; color: white;"><strong>Total Average Percentage of plagiarism: {{ total_similarity }}%</strong></p>
+                <a href="{{ url_for('similarity_analysis', urls=urls, similarities=similarities) }}" class="btn btn-info mt-3">View Detailed Similarity Analysis</a>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
