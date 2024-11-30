@@ -36,7 +36,8 @@ Installation
 Clone the repository:
 bash
 Copy code
-git clone: https//github.com/Kanitihemasundar/Plagiarism-Detection
+
+git clone: [https//github.com/Kanitihemasundar/Plagiarism-Detection](https://github.com/Kanitihemasundar/Plagiarism-Detection)
 
 Navigate to the project directory:
 bash
@@ -47,12 +48,15 @@ bash
 Copy code
 python app.py
 Usage
+
 Text Plagiarism Detection:
 Upload a text file or paste the content into the tool.
 View similarity scores and highlighted plagiarized sections.
+
 Video Plagiarism Detection:
 Upload a video or provide a URL.
 Receive a similarity score and potential source links.
+
 Visualization:
 Download a CSV of scores.
 Use the interface to view highlighted text and visual graphs.
