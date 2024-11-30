@@ -31,7 +31,7 @@ Installation
 Clone the repository:
 bash
 Copy code
-git clone https://github.com/yourusername/plagiarism-detection-tool.git
+git clone:https//github.com/Kanitihemasundar/Plagiarism-Detection
 Navigate to the project directory:
 bash
 Copy code
